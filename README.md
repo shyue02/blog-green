@@ -26,7 +26,7 @@ create table users(
 );
 
 create table boards(
-    id int primary KEY auto_increment,
+    id int primary key,
     title varchar(150),
     content longtext,
     usersId int,
