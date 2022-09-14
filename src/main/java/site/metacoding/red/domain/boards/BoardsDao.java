@@ -9,7 +9,7 @@ import site.metacoding.red.web.dto.response.boards.PagingDto;
 
 public interface BoardsDao {
 	public void insert(Boards boards);
-	public List<MainDto> findAll(int startNum, String keyword);
+	public List<MainDto> findAll(@Param("startNum") int startNum,@Param("keyword") String keyword);
 	public Boards findById(Integer id);		//처음에는 Boards로 받고 나중에 수정 / id로 찾을거라서
 	public void update(Boards boards);
 	public void deleteById(Integer id);		// id로 삭제할거라서

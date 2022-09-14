@@ -22,7 +22,7 @@
 		<if test="keyword != null">
 			WHERE title like CONCAT('%',#{keyword},'%')
 		</if>
-		) result <!-- 마리아db는 인라인뷰할 때 꼭 별칭을 넣어줘야한다 -->
+		) result
 	</select>
 
 	<insert id="insert">
@@ -63,4 +63,3 @@
 	</delete>
 
 </mapper>
-
