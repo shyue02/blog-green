@@ -18,7 +18,7 @@ public class UsersService {
 	private final UsersDao usersDao;
 	private final BoardsDao boardsDao;
 
-	public void 회원가입(JoinDto joinDto) { // username, password,eamil (id, createdAt) -> dto로 받자 / users 테이블에 접근
+	public void 회원가입(JoinDto joinDto) { // username, password,eamil /id, createdAt는 외부에서 안 받음-> dto로 받자 / users 테이블에 접근
 		// 1. 디티오를 엔티티로 변경하는 코드
 		Users users = joinDto.toEntity();
 		// 2. 엔티티로 insert. 디비 수행
