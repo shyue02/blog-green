@@ -27,7 +27,8 @@ public class UsersService {
 
 	public Users 로그인(LoginDto logindto) { // username, password
 		Users usersPS = usersDao.findByUsername(logindto.getUsername()); // 굳이 엔티티로 바꿀 필요 없다
-		if (usersPS == null) {
+		
+		if (usersPS == null) {	//확인이 더 필요
 			return null;
 		}
 
@@ -39,13 +40,14 @@ public class UsersService {
 		}
 	}
 
-	public void 회원수정(Integer id, UpdateDto updateDto) { // id, 디티오(password, eamil)
+	public Users 회원수정(Integer id, UpdateDto updateDto) { // id, 디티오(password, eamil)
 		// 1. 영속화 (id로 select)
 		Users usersPS = usersDao.findById(id);
 		// 2. 영속화 된 객체 변경
 		usersPS.update(updateDto);
 		// 3. db 수행
 		usersDao.update(usersPS);
+		return usersPS;
 	}
 
 	@Transactional(rollbackFor = RuntimeException.class) // db에서 deleteById를 하면 write수행하는 동시에 트랜젝션이 걸린다

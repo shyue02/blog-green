@@ -59,7 +59,7 @@
       let username = $("#username").val();   //get 요청, -> 쿼리스트링을 날린다, -> body 데이터가 없어서 json을 만들 필요가 없다
 
       // 2. Ajax 통신
-      $.ajax("/users/usernameSameCheck?username="+username,{ //"http의주소",{}.done(행위의결과); / 응답의 결과가 done 에 들어온다
+      $.ajax("/users/usernameSameCheck?username="+username,{ //()"http의주소",{object}).done(행위의결과); / 응답의 결과가 done 에 들어온다
 
          type:"GET",
          dataType: "json",	// 디폴트값 json

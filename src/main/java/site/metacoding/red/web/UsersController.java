@@ -54,11 +54,11 @@ public class UsersController {
 	@PostMapping("/login")
 	public @ResponseBody CMRespDto<?> login(@RequestBody LoginDto loginDto) { // join할 때는 joinDto를 받아야 한다
 		Users principal = usersService.로그인(loginDto);
-		
+
 		if (principal == null) {
 			return new CMRespDto<>(-1, "로그인실패", null);
 		}
-		
+
 		session.setAttribute("principal", principal);
 		return new CMRespDto<>(1, "로그인성공", null);
 	}
@@ -71,16 +71,18 @@ public class UsersController {
 	}
 
 	@PutMapping("/users/{id}")
-	public String update(@PathVariable Integer id, UpdateDto updateDto) {
-		usersService.회원수정(id, updateDto);
-		return "redirect:/users/" + id;
+	public @ResponseBody CMRespDto<?> update(@PathVariable Integer id, @RequestBody UpdateDto updateDto) {
+		Users usersPS = usersService.회원수정(id, updateDto);
+		session.setAttribute("principal", usersPS); // 세션 동기화
+		return new CMRespDto<>(1, "회원수정 성공", null);
 	}
 
 	@DeleteMapping("/users/{id}")
-	public @ResponseBody String delete(@PathVariable Integer id) {
+	public @ResponseBody CMRespDto<?> delete(@PathVariable Integer id) {
 		usersService.회원탈퇴(id);
-		return Script.href("/loginForm", "회원탈퇴가 완료되었습니다"); // @ResponseBody을 안붙이면 파일명인 줄 안다
-	}
+		session.invalidate();
+		return new CMRespDto<>(1, "회원탈퇴성공", null);
+	}// @ResponseBody을 안붙이면 파일명인 줄 안다
 
 	@GetMapping("/logout") // 로그아웃
 	public String logout() {

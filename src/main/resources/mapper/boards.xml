@@ -9,7 +9,8 @@
 		SELECT totalCount,
 		totalPage,
 		currentPage,
-		if(currentPage = 0, 1, 0) first,
+		if(currentPage = 0, 1, 0)
+		first,
 		if(currentPage = totalPage-1, 1, 0) last
 		FROM
 		(
@@ -62,4 +63,7 @@
 		DELETE FROM boards WHERE id = #{id}
 	</delete>
 
+	<update id="updateByUsersId">
+		UPDATE boards SET usersId = null WHERE usersId = #{usersId}
+	</update>
 </mapper>
