@@ -27,6 +27,10 @@ public class UsersService {
 
 	public Users 로그인(LoginDto logindto) { // username, password
 		Users usersPS = usersDao.findByUsername(logindto.getUsername()); // 굳이 엔티티로 바꿀 필요 없다
+		if (usersPS == null) {
+			return null;
+		}
+
 		// if로 usersPS의 password와 디티오 password 비교
 		if (usersPS.getPassword().equals(logindto.getPassword())) {
 			return usersPS;
@@ -55,9 +59,9 @@ public class UsersService {
 		Users usersPS = usersDao.findByUsername(username);
 
 		if (usersPS == null) {// 있으면 true, 없으면 false
-			return false;	// 아이디 중복 x
+			return false; // 아이디 중복 x -> 회원가입 진행 가능
 		} else {
-			return true;		// 아이디 중복
+			return true; // 아이디 중복
 		}
 	}
 
