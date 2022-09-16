@@ -12,9 +12,8 @@
       </div>
       <div class="form-check mb-3">
          <label class="form-check-label"> 
-         <input id="remember" class="form-check-input"
-            type="checkbox"> Remember me
-         </label>
+         <input id="remember" class="form-check-input" type="checkbox"> Remember me
+         </label>	
       </div>
       <button id="btnLogin" type="button" class="btn btn-primary">로그인</button>
    </form>
