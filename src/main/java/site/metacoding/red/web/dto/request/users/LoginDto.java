@@ -8,4 +8,5 @@ import lombok.Setter;
 public class LoginDto {
 	private String username;
 	private String password;
+	private boolean remember;	// true or false 로 나오니까 boolean
 }

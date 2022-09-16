@@ -1,4 +1,4 @@
-package site.metacoding.red.web.dto.response.boards;
+package site.metacoding.red.web.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

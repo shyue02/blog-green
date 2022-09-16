@@ -12,10 +12,10 @@ $("#btnUsernameSameCheck").click(() => {	// 리스너. / 행위는 람다식으�
 });
 
 
-
 //	로그인
 $("#btnLogin").click(() => {
 	login();	// 로그인 함수  호출
+	//loginTest();	// 로그인 테스트
 });
 
 
@@ -63,17 +63,16 @@ function join() {
 
 
 function checkUsername() {
-	// 0. 통신 오브젝트 생성(->json 스트링으로 바로 바꾸기 위해서). (Get 요청은 body가 없다.)
-
-	// 1. 사용자가 적은 입력값 username 값을 가져오기 -> 가져오려면 id를 알아야 한다.
 	let username = $("#username").val();   //get 요청, -> 쿼리스트링을 날린다, -> body 데이터가 없어서 json을 만들 필요가 없다
 
 	// 2. Ajax 통신
-	$.ajax(`/users/usernameSameCheck?username= ${username}`,{
+	$.ajax(`/users/usernameSameCheck?username= + ${username}`, { //"http의주소",{}.done(행위의결과); / 응답의 결과가 done 에 들어온다
+
 		type: "GET",
-		dataType: "json",	// 디폴트값 json
+		dataType: "json",   // 디폴트값 json
 		async: true
-	}).done((res) => {		//람다식 (js에서 익명함수를 써도 되지만 코드가 간결)
+	}).done((res) => {      //람다식 (js에서 익명함수를 써도 되지만 코드가 간결)
+		console.log(res);
 		if (res.code == 1) { // 통신 성공
 			if (res.data == false) {
 				alert("아이디가 중복되지 않았습니다.");
@@ -87,11 +86,17 @@ function checkUsername() {
 	});
 }
 
+// 로그인 테스트용
+//function loginTest() {
+//	let remember = $("#remember").prop("checked");
+//	console.log(remember);
+//}
+
 function login() {
-	alert("login 함수 실행됨");
 	let data = {
 		username: $("#username").val(),
-		password: $("#password").val()
+		password: $("#password").val(),
+		remember: $("#remember").prop("checked")
 	};
 
 
@@ -106,6 +111,9 @@ function login() {
 		if (res.code == 1) {
 			location.href = "/";
 		}
+		//else{
+		//alert("로그인 실패, 아이디 패스워드를 확인해주세요");
+		//}
 	});
 }
 
