@@ -36,16 +36,22 @@ public class BoardsController {
 	 * 
 	 * 인증과 권한 체크는 지금 하지 마세요!!
 	 */
-	
+
 	// 어떤 게시글을 누가 좋아하는지 (boardsId, usersId)
 	@PostMapping("/boards/{id}/loves")
-	public @ResponseBody CMRespDto<?> insertLoves(@PathVariable Integer id){
+	public @ResponseBody CMRespDto<?> insertLoves(@PathVariable Integer id) {
 		Users principal = (Users) session.getAttribute("principal");
 		Loves loves = new Loves(principal.getId(), id);
 		boardsService.좋아요(loves);
 		return new CMRespDto<>(1, "좋아요 성공", null);
 	}
-	
+
+	@DeleteMapping("/boards/{id}/loves/{lovesId}")
+	public @ResponseBody CMRespDto<?> deleteLoves(@PathVariable Integer id, @PathVariable Integer lovesId) {
+		boardsService.좋아요취소(lovesId);
+		return new CMRespDto<>(1, "좋아요 취소 성공", null);
+	}
+
 	@PutMapping("/boards/{id}")
 	public @ResponseBody CMRespDto<?> update(@PathVariable Integer id, @RequestBody UpdateDto updateDto) {
 		boardsService.게시글수정하기(id, updateDto);
@@ -88,9 +94,9 @@ public class BoardsController {
 	@GetMapping("/boards/{id}")
 	public String getBoardDetail(@PathVariable Integer id, Model model) {
 		Users principal = (Users) session.getAttribute("principal");
-		if(principal == null) {
+		if (principal == null) {
 			model.addAttribute("detailDto", boardsService.게시글상세보기(id, 0));
-		}else {
+		} else {
 			model.addAttribute("detailDto", boardsService.게시글상세보기(id, principal.getId()));
 		}
 

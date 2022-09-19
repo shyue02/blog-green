@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import site.metacoding.red.web.dto.response.boards.DetailDto;
 import site.metacoding.red.web.dto.response.boards.MainDto;
 import site.metacoding.red.web.dto.response.boards.PagingDto;
 
@@ -15,4 +16,5 @@ public interface BoardsDao {
 	public void update(Boards boards);
 	public void deleteById(Integer id);		// id로 삭제할거라서
 	public void updateByUsersId(Integer usersId);
+	public DetailDto findByDetail(@Param("boardsId") Integer boardsId, @Param("principalId") Integer principalId);
 }	//param이 여러개 일때는 @을 붙여줘야 한다
