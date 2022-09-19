@@ -13,8 +13,10 @@ import site.metacoding.red.domain.users.Users;
 import site.metacoding.red.domain.users.UsersDao;
 import site.metacoding.red.web.dto.request.boards.UpdateDto;
 import site.metacoding.red.web.dto.request.boards.WriteDto;
+import site.metacoding.red.web.dto.response.boards.DetailDto;
 import site.metacoding.red.web.dto.response.boards.MainDto;
 import site.metacoding.red.web.dto.response.boards.PagingDto;
+import site.metacoding.red.web.dto.response.loves.LovesDto;
 
 @RequiredArgsConstructor
 @Service
@@ -23,10 +25,11 @@ public class BoardsService {
 	private final UsersDao usersDao;
 	private final BoardsDao boardsDao;
 	private final LovesDao lovesDao;
-	
+
 	public void 좋아요취소(Integer id) {
-		
+
 	}
+	
 	public void 좋아요(Loves loves) {
 		lovesDao.insert(loves);
 	}
@@ -51,15 +54,27 @@ public class BoardsService {
 		return pagingDto;
 	}
 
-	public Boards 게시글상세보기(Integer id) {
+	public DetailDto 게시글상세보기(Integer id, Integer principalId) {
+		System.out.println("게시글 id : "+id);
+		Boards boardsPS = boardsDao.findById(id);
+		LovesDto lovesDto = lovesDao.findByBoardsId(id, principalId);	
+		if(lovesDto == null) {
+			lovesDto = new LovesDto();
+			lovesDto.setCount(0);
+			lovesDto.setLoved(false);
+		}
+		return new DetailDto(boardsPS, lovesDto);
+	}
+	
+	public Boards 게시글수정화면데이터가져오기(Integer id) {
 		return boardsDao.findById(id);
 	}
 
 	public void 게시글수정하기(Integer id, UpdateDto updateDto) {
 		// 1. 영속화
 		Boards boardsPS = boardsDao.findById(id);
-
-		if (boardsPS == null) {
+		
+		if(boardsPS == null) {
 			// 이 부분은 나중에 처리!! (exception 처리하는 법 따로 배울 예정)
 		}
 
@@ -72,11 +87,9 @@ public class BoardsService {
 
 	public void 게시글삭제하기(Integer id) {
 		Boards boardsPS = boardsDao.findById(id);
-
-		if (boardsPS == null) {
+		if(boardsPS == null) {
 			// 이 부분은 나중에 처리!! (exception 처리하는 법 따로 배울 예정)
 		}
-
 		boardsDao.deleteById(id);
 	}
 
