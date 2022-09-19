@@ -14,6 +14,8 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<!-- 내가 만든건 제일 밑에 두자 - 규칙 -->
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
