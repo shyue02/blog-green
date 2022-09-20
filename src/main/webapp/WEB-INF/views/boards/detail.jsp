@@ -79,6 +79,8 @@
 				// 좋아요 수 1 증가
 				let count = $("#countLove").text();
 				$("#countLove").text(Number(count)+1);
+				$("#lovesId").val(res.data.id);
+				console.log(res);
 			}else{
 				alert("좋아요 실패했습니다");
 			}
@@ -87,22 +89,22 @@
 	
 	// DB에 delete 요청하기
 	function deleteLove(){
-		let id = $("#id").val();
-		let lovesId = $("#lovesId").val();
-		
-		$.ajax("/boards/"+id+"/loves/"+lovesId, {
-			type: "DELETE",
-			dataType: "json"
-		}).done((res) => {
-			if (res.code == 1) {
-				renderCancelLoves();
-				let count = $("#countLove").text();
-				$("#countLove").text(Number(count)-1);
-			}else{
-				alert("좋아요 취소에  실패했습니다");
-			}
-		});
-	}
+      let id = $("#id").val();
+      let lovesId = $("#lovesId").val();
+      
+      $.ajax("/boards/"+id+"/loves/"+lovesId, {
+         type: "DELETE",
+         dataType: "json"
+      }).done((res) => {
+         if (res.code == 1) {
+            renderCancelLoves();
+            let count = $("#countLove").text();
+            $("#countLove").text(Number(count)-1);
+         }else{
+            alert("좋아요 취소에 실패했습니다");
+         }
+      });
+   }
 	
 	// 빨간색 하트 그리기
 	function renderLoves(){
