@@ -31,7 +31,7 @@ public class UsersController {
 	private final HttpSession session;
 
 	// http://localhost:8000/users/usernameSameCheck
-	@GetMapping("/users/usernameSameCheck")
+	@GetMapping("/api/users/usernameSameCheck")
 	public @ResponseBody CMRespDto<Boolean> usernameSameCheck(String username) {
 		boolean isSame = usersService.유저네임중복확인(username);
 		return new CMRespDto<Boolean>(1, "sucess", isSame);
@@ -57,13 +57,13 @@ public class UsersController {
 		return "users/loginForm"; // 파일을 리턴
 	}
 
-	@PostMapping("/join")
+	@PostMapping("/api/join")
 	public @ResponseBody CMRespDto<?> join(@RequestBody JoinDto joinDto) { // join할 때는 joinDto를 받아야 한다
 		usersService.회원가입(joinDto);
 		return new CMRespDto<>(1, "회원가입성공", null);
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/api/login")
 	public @ResponseBody CMRespDto<?> login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
 		System.out.println("=========");
 		System.out.println(loginDto.isRemember());
@@ -99,14 +99,14 @@ public class UsersController {
 	}
 	
 	// 인증 필요
-	@PutMapping("/s/users/{id}")
+	@PutMapping("/s/api/sers/{id}")	//ajax 요청할 때만 api (ResponseBody 붙으면 ajax)
 	public @ResponseBody CMRespDto<?> update(@PathVariable Integer id, @RequestBody UpdateDto updateDto) {
 		Users usersPS = usersService.회원수정(id, updateDto);
 		session.setAttribute("principal", usersPS); // 세션 동기화
 		return new CMRespDto<>(1, "회원수정 성공", null);
 	}
 	// 인증 필요
-	@DeleteMapping("/s/users/{id}")
+	@DeleteMapping("/s/api/users/{id}")
 	public @ResponseBody CMRespDto<?> delete(@PathVariable Integer id) {
 		usersService.회원탈퇴(id);
 		session.invalidate();

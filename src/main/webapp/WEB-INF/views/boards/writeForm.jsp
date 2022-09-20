@@ -14,33 +14,7 @@
 	</form>
 </div>
 
-<script>
-	$("#btnSave").click(()=>{
-		save();
-	});
-	
-	   function save(){
-		      // 0. 통신 오브젝트 생성
-		      let data = {
-		         title: $("#title").val(),
-		         content: $("#content").val(),
-		      };
-
-		      $.ajax("/s/boards", {
-		         type: "POST",
-		         dataType: "json",
-		         data: JSON.stringify(data),
-		         headers: {
-		            "Content-Type": "application/json"   //json 타입 컨텐트 타입 날릴꺼야!
-		         }
-		      }).done((res) => {
-		         if (res.code == 1) {
-		            console.log(res);
-		            location.href = "/";
-		         }
-		      });
-		   }
-</script>
+<script src="/js/boards.js"></script>
 
 <script>
         $('#content').summernote({   

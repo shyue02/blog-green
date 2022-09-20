@@ -46,7 +46,7 @@ function join() {
 		email: $("#email").val()
 	};
 
-	$.ajax("/join", {
+	$.ajax("/api/join", {
 		type: "POST",
 		dataType: "json",
 		data: JSON.stringify(data),
@@ -66,7 +66,7 @@ function checkUsername() {
 	let username = $("#username").val();   //get 요청, -> 쿼리스트링을 날린다, -> body 데이터가 없어서 json을 만들 필요가 없다
 
 	// 2. Ajax 통신
-	$.ajax(`/users/usernameSameCheck?username= + ${username}`, { //"http의주소",{}.done(행위의결과); / 응답의 결과가 done 에 들어온다
+	$.ajax(`/api/users/usernameSameCheck?username= + ${username}`, { //"http의주소",{}.done(행위의결과); / 응답의 결과가 done 에 들어온다
 
 		type: "GET",
 		dataType: "json",   // 디폴트값 json
@@ -100,7 +100,7 @@ function login() {
 	};
 
 
-	$.ajax("/login", {
+	$.ajax("/api/login", {
 		type: "POST",
 		dataType: "json",
 		data: JSON.stringify(data),	// http body에 들고갈 요청 데이터
@@ -120,7 +120,7 @@ function login() {
 function resign() {
 	let id = $("#id").val();
 
-	$.ajax("/s/users/" + id, {
+	$.ajax("/s/api/users/" + id, {
 		type: "DELETE",
 		dataType: "json" // 응답 데이터
 	}).done((res) => {
@@ -143,7 +143,7 @@ function update() {
 
 	let id = $("#id").val();
 
-	$.ajax("/s/users/" + id, {
+	$.ajax("/s/api/users/" + id, {
 		type: "PUT",
 		dataType: "json", // 응답 데이터
 		data: JSON.stringify(data), // http body에 들고갈 요청 데이터
