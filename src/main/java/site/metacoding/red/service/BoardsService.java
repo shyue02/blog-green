@@ -10,7 +10,6 @@ import site.metacoding.red.domain.boards.BoardsDao;
 import site.metacoding.red.domain.loves.Loves;
 import site.metacoding.red.domain.loves.LovesDao;
 import site.metacoding.red.domain.users.Users;
-import site.metacoding.red.domain.users.UsersDao;
 import site.metacoding.red.web.dto.request.boards.UpdateDto;
 import site.metacoding.red.web.dto.request.boards.WriteDto;
 import site.metacoding.red.web.dto.response.boards.DetailDto;

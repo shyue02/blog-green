@@ -26,7 +26,7 @@
 		         content: $("#content").val(),
 		      };
 
-		      $.ajax("/boards", {
+		      $.ajax("/s/boards", {
 		         type: "POST",
 		         dataType: "json",
 		         data: JSON.stringify(data),

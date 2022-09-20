@@ -1,30 +1,3 @@
-Skip to content
-Search or jump to…
-Pulls
-Issues
-Marketplace
-Explore
- 
-@shyue02 
-codingspecialist
-/
-blog-green
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-blog-green/src/main/webapp/WEB-INF/views/boards/updateForm.jsp
-
-ssar 게시글 삭제 및 수정 하기 완료
-Latest commit 535c75c 17 minutes ago
- History
- 0 contributors
-57 lines (48 sloc)  1.35 KB
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
@@ -54,7 +27,7 @@ Latest commit 535c75c 17 minutes ago
 				content: $("#content").val()
 			};
 			let id = $("#id").val();
-			$.ajax("/boards/" + id, {
+			$.ajax("/s/boards/" + id, {
 				type: "PUT",
 				dataType: "json", // 응답 데이터
 				data: JSON.stringify(data), // http body에 들고갈 요청 데이터
@@ -79,4 +52,3 @@ Latest commit 535c75c 17 minutes ago
 	});
 </script>
 <%@ include file="../layout/footer.jsp"%>
-
