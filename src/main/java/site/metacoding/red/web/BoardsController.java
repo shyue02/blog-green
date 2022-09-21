@@ -48,9 +48,9 @@ public class BoardsController {
 	}
 	
 	// 인증 필요
-	@DeleteMapping("/s/api/boards/{id}/loves/{lovesId}")
+	@DeleteMapping("/s/api/boards/{id}/loves/{lovesId}")		// 여기서 Id는 boards의 id -> 충돌 방지하고자 {locesId} 
 	public @ResponseBody CMRespDto<?> deleteLoves(@PathVariable Integer id, @PathVariable Integer lovesId) {
-		boardsService.좋아요취소(lovesId);
+		boardsService.좋아요취소(lovesId);	
 		return new CMRespDto<>(1, "좋아요 취소 성공", null);
 	}
 	

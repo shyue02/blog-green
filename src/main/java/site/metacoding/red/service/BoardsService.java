@@ -57,7 +57,13 @@ public class BoardsService {
 	}
 
 	public Boards 게시글수정화면데이터가져오기(Integer id) {
-		return boardsDao.findById(id);
+		
+		Boards boards = boardsDao.findById(id);
+		
+		if(boards == null) {
+			throw new RuntimeException(id+"의 게시글을 찾을 수 없습니다.");
+		}
+		return boards;
 	}
 
 	public void 게시글수정하기(Integer id, UpdateDto updateDto) {
@@ -65,7 +71,7 @@ public class BoardsService {
 		Boards boardsPS = boardsDao.findById(id);
 
 		if (boardsPS == null) {
-			// 이 부분은 나중에 처리!! (exception 처리하는 법 따로 배울 예정)
+			throw new RuntimeException(id+"의 게시글을 찾을 수 없습니다.");	 // 서비스에서 오류 생기면 DS에 있는 캐치 발동
 		}
 
 		// 2. 변경

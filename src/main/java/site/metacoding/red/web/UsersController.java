@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.red.domain.users.Users;
+import site.metacoding.red.handler.ex.MyApiException;
 import site.metacoding.red.service.UsersService;
 import site.metacoding.red.web.dto.request.users.JoinDto;
 import site.metacoding.red.web.dto.request.users.LoginDto;
@@ -59,6 +60,12 @@ public class UsersController {
 
 	@PostMapping("/api/join")
 	public @ResponseBody CMRespDto<?> join(@RequestBody JoinDto joinDto) { // join할 때는 joinDto를 받아야 한다
+		
+		// 유효성검사
+		if(joinDto.getUsername().length() >20) {
+			throw new MyApiException("유저네임 너무 길어");	//API붙으면 데이터 응답
+		}
+		
 		usersService.회원가입(joinDto);
 		return new CMRespDto<>(1, "회원가입성공", null);
 	}
